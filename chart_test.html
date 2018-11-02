@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <title>AquaPi | Total Water Usage</title>
+    <meta name="description" content="test">
+    <link rel="shortcut icon" type="image/x-icon" href="logo-round.png" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="jquery.csv.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+    // load the visualisation API
+    google.load('visualization', '1', { packages: ['corechart', 'controls'] });
+    // remove 000webhost branding
+    $(document).ready(function(){
+        $('body').find('img[src$="https://cdn.rawgit.com/000webhost/logo/e9bd13f7/footer-powered-by-000webhost-white2.png"]').remove();
+    });
+    </script>
+
+    <script type="text/javascript">
+        function drawVisualization() {
+            $.get("totals/daily.csv", function(csvString) {
+                // transform the CSV string into a 2-dimensional array
+                var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+                // this new DataTable object holds all the data
+                var data = new google.visualization.arrayToDataTable(arrayData);
+                // CAPACITY - En-route ATFM delay - YY - CHART
+                var options = {
+                    title: 'Total Water Uage - Past Week',
+                    pieHole: 0.75,
+                    colors: ['#000','#777','#888','#999','#ccc','#ddd','#fff']
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            });
+        }
+        // setTimeout(google.setOnLoadCallback(drawVisualization),1000);
+        google.setOnLoadCallback(drawVisualization)
+    </script>
+</head>
+
+<div id="piechart"></div>
