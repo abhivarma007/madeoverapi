@@ -25,10 +25,6 @@
     <script type="text/javascript">
         function drawVisualization() {
             $.get("totals/daily.csv", function(csvString) {
-                // OLD (Google Graphs)
-                // transform the CSV string into a 2-dimensional array
-                // var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-
                 // Split CSV string into labels and data values
                 var labelNames = new Array()
                 var dataValues = new Array()
@@ -71,6 +67,8 @@
                 // setTimeout(updateChart(),1000)
 
                 // OLD (Google Graphs)
+                // transform the CSV string into a 2-dimensional array
+                // var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
                 // this new DataTable object holds all the data
                 // var data = new google.visualization.arrayToDataTable(arrayData);
                 // var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -78,13 +76,7 @@
             });
         }
 
-        setTimeout(google.setOnLoadCallback(drawVisualization),3000);
-
-
-        with open('totals/daily.csv') as file:
-            _ = next(file)
-            reader = csv.DictReader(f)
-            counties = { line['County']: line['State'] for line in reader }
+        // setTimeout(google.setOnLoadCallback(drawVisualization),3000);
     </script>
 </head>
 
