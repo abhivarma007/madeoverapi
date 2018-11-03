@@ -80,7 +80,7 @@
             }
             // Auto-update charts
             function updateChart(chart) {
-                chart.data.datasets[].data = sortData(getData("/totals/daily.csv"))[1];
+                chart.data.datasets[0].data = sortData(getData("/totals/daily.csv"))[1];
                 chart.data.labels = sortData(getData("/totals/daily.csv"))[0];
                 chart.update()
             }
