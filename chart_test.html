@@ -26,6 +26,7 @@
     // allows watching globally via Chrome DevTools
     var labelNames = new Array();
     var dataValues = new Array();
+
         function drawVisualization() {
             $.get("totals/daily.csv", function(csvString) {
                 // Split CSV string into labels and data values
@@ -35,20 +36,23 @@
                     if (i != 0 && i != (lines.length - 1)) {
                         var items = line.split(",");
                         labelNames.push(items[0]);
-                        dataValues.push(items[1]);
+                        dataValues.push(Number(items[1]));
                     }
                     i ++
                 });
                 alert(labelNames);
                 alert(dataValues);
+
                 // Specify chart data
                 data = {
                     datasets: [{
                         label: "Amount of water used today /L",
                         data: dataValues
+                        // data: [100,36,24.803,25.483,24.729,10,0]
                     }],
                     // These labels appear in the legend and in the tooltips when hovering different arcs
                     labels: labelNames
+                    // labels: ["Bath","Kitchen Sink","Dishwasher","Washing Machine","Shower","Bathroom Tap","Outdoor Hose"]
                 };
                 var options = {
                     title: 'Total Water Uage - Past Week',
