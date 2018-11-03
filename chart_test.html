@@ -22,8 +22,8 @@
             window.onload = function() {
                 function getData(filePath) {
                     var data = "";
-                    $.get("/totals/daily.csv", function(fileContent) {
-                        data = fileContent;
+                    $.get("/totals/daily.csv", function(data) {
+                        data = data;
                     });
                     return data;
                 }
