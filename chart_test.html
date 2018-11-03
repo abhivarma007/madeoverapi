@@ -29,7 +29,18 @@
                 var labelNames = new Array();
                 var dataValues = new Array();
                 var i = 0;
-                for (line in csvString.split("\n")) {
+                var lines = csvString.split("\n")
+                alert(lines[0]);
+                alert(lines[1]);
+                alert(lines[2]);
+                alert(lines[3]);
+                alert(lines[4]);
+                alert(lines[5]);
+                alert(lines[6]);
+                alert(lines[7]);
+                alert(lines[8]);
+                alert(lines[9]);
+                for (line in lines) {
                     if (i != 0) {
                         alert(line);
                         var items = line.split(",");
