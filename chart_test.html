@@ -23,11 +23,12 @@
     </script> -->
 
     <script type="text/javascript">
+    // allows watching globally via Chrome DevTools
+    var labelNames = new Array();
+    var dataValues = new Array();
         function drawVisualization() {
             $.get("totals/daily.csv", function(csvString) {
                 // Split CSV string into labels and data values
-                var labelNames = new Array();
-                var dataValues = new Array();
                 var i = 0;
                 var lines = csvString.split("\n")
                 lines.forEach(function(line) {
