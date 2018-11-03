@@ -20,13 +20,6 @@
 
         <script type="text/javascript">
             window.onload = function() {
-                function getData(filePath) {
-                    var string = "";
-                    $.get("/totals/daily.csv", function(data) {
-                        string = data;
-                    });
-                    return data;
-                }
 
                 function sortData(data) {
                     // Split CSV string into labels and data values
@@ -45,38 +38,40 @@
                     return [labelNames,dataValues];
                 }
 
-                var labelsAndData = sortData(getData("/totals/daily.csv"));
-                var labelNames = labelsAndData[0];
-                var dataValues = labelsAndData[1];
+                $.get("/totals/daily.csv", function(fileContent) {
+                    var labelsAndData = sortData(fileContent);
+                    var labelNames = labelsAndData[0];
+                    var dataValues = labelsAndData[1];
 
-                // Specify chart config options
-                window.dailyTotalDoughnutChartConfig = {
-                    type: "doughnut",
-                    data: {
-                        datasets: [{
-                            label: "Amount of water used today /L",
-                            backgroundColor: ['red','#111','yellow','#333','pink','#555','#666','#777','#888','#999','#ccc','#ddd','#fff'],
-                            data: dataValues,
-                            label: "Water usage /L"
-                        }],
-                        labels: labelNames
-                    },
-                    options: {
-                        responsive: true,
-                        title: {
-                            display: true,
-                            text: 'Total Water Usage - Past Week'
+                    // Specify chart config options
+                    window.dailyTotalDoughnutChartConfig = {
+                        type: "doughnut",
+                        data: {
+                            datasets: [{
+                                label: "Amount of water used today /L",
+                                backgroundColor: ['red','#111','yellow','#333','pink','#555','#666','#777','#888','#999','#ccc','#ddd','#fff'],
+                                data: dataValues,
+                                label: "Water usage /L"
+                            }],
+                            labels: labelNames
                         },
-                        animation: {
-        					animateScale: true,
-        					animateRotate: true
-        				}
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Total Water Usage - Past Week'
+                            },
+                            animation: {
+            					animateScale: true,
+            					animateRotate: true
+            				}
+                        }
                     }
-                }
 
-                // Draw doughnut chart
-                var ctx = document.getElementById("dailyTotalDoughnutChart");
-                window.dailyTotalDoughnutChart = new Chart(ctx, window.dailyTotalDoughnutChartConfig);
+                    // Draw doughnut chart
+                    var ctx = document.getElementById("dailyTotalDoughnutChart");
+                    window.dailyTotalDoughnutChart = new Chart(ctx, window.dailyTotalDoughnutChartConfig);
+                });
 
                 // // Auto-update charts
                 // function updateChart(chart) {
