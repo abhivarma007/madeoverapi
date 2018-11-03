@@ -32,6 +32,8 @@
                 for (line in csvString.split("\n")) {
                     if (i != 0) {
                         var items = line.split(",");
+                        alert(items[0]);
+                        alert(items[1]);
                         labelNames.push(items[0]);
                         dataValues.push(items[1]);
                     } else {
