@@ -21,9 +21,9 @@
         <script type="text/javascript">
             window.onload = function() {
                 function getData(filePath) {
-                    var data = "";
+                    var string = "";
                     $.get("/totals/daily.csv", function(data) {
-                        data = data;
+                        string = data;
                     });
                     return data;
                 }
