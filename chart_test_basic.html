@@ -19,18 +19,20 @@
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
         <script type="text/javascript">
-                var ctx = document.getElementById("chart");
-                var dailyTotalDoughnutChart = new Chart(ctx, {
-                    type: "doughnut",
-                    data: {
-                        datasets: [{
-                            data: [100,36,24.803,25.483,24.729,10,0]
-                        }],
-                        labels: ["Bath","Kitchen Sink","Dishwasher","Washing Machine","Shower","Bathroom Tap","Outdoor Hose"]
-                    },
-                    options: {
-                    }
-                });
+            window.onload = function() {
+                    var ctx = document.getElementById("chart");
+                    var dailyTotalDoughnutChart = new Chart(ctx, {
+                        type: "doughnut",
+                        data: {
+                            datasets: [{
+                                data: [100,36,24.803,25.483,24.729,10,0]
+                            }],
+                            labels: ["Bath","Kitchen Sink","Dishwasher","Washing Machine","Shower","Bathroom Tap","Outdoor Hose"]
+                        },
+                        options: {
+                        }
+                    });
+                };
         </script>
     </head>
     <body>
