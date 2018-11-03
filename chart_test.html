@@ -76,7 +76,7 @@
 
                 // Draw doughnut chart
                 var ctx = document.getElementById("dailyTotalDoughnutChart");
-                var dailyTotalDoughnutChart = new Chart(ctx, config);
+                var window.dailyTotalDoughnutChart = new Chart(ctx, config);
             }
             // Auto-update charts
             function updateChart(chart) {
@@ -85,7 +85,7 @@
                 // chart.config.data = sortData(getData("/totals/daily.csv"))[1];
                 // chart.update()
             }
-            setTimeout(updateChart(dailyTotalDoughnutChart),5000);
+            setTimeout(updateChart(window.dailyTotalDoughnutChart),5000);
         </script>
     </head>
     <body>
