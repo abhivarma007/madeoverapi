@@ -80,9 +80,9 @@
             }
             // Auto-update charts
             function updateChart(chart) {
-                chart.data.datasets[0].data = sortData(getData("/totals/daily.csv"))[1];
-                chart.data.labels = sortData(getData("/totals/daily.csv"))[0];
-                chart.update()
+                config.data.datasets[0].data = sortData(getData("/totals/daily.csv"))[1];
+                config.data.labels = sortData(getData("/totals/daily.csv"))[0];
+                chart.update();
             }
             setTimeout(updateChart(window.dailyTotalDoughnutChart),5000);
         </script>
