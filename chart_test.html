@@ -30,30 +30,14 @@
                 var dataValues = new Array();
                 var i = 0;
                 var lines = csvString.split("\n")
-                alert(lines[0]);
-                alert(lines[1]);
-                alert(lines[2]);
-                alert(lines[3]);
-                alert(lines[4]);
-                alert(lines[5]);
-                alert(lines[6]);
-                alert(lines[7]);
-                alert(lines[8]);
-                alert(lines[9]);
                 lines.forEach(function(line) {
-                    if (i != 0) {
-                        alert(line);
+                    if (i != 0 && i != (lines.length - 1)) {
                         var items = line.split(",");
-                        alert(items[0]);
-                        alert(items[1]);
                         labelNames.push(items[0]);
                         dataValues.push(items[1]);
-                    } else {
-                        i ++
                     }
+                    i ++
                 });
-                alert(csvString);
-                alert(csvString.split("\n"));
                 alert(labelNames);
                 alert(dataValues);
                 // Specify chart data
