@@ -40,7 +40,7 @@
                 alert(lines[7]);
                 alert(lines[8]);
                 alert(lines[9]);
-                for (var line in lines) {
+                lines.forEach(function(line) {
                     if (i != 0) {
                         alert(line);
                         var items = line.split(",");
@@ -51,7 +51,7 @@
                     } else {
                         i ++
                     }
-                }
+                });
                 alert(csvString);
                 alert(csvString.split("\n"));
                 alert(labelNames);
