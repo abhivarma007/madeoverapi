@@ -26,22 +26,25 @@
         function drawVisualization() {
             $.get("totals/daily.csv", function(csvString) {
                 // Split CSV string into labels and data values
-                var labelNames = new Array()
-                var dataValues = new Array()
-                var i = 0
+                var labelNames = new Array();
+                var dataValues = new Array();
+                var i = 0;
                 for (line in csvString.split("\n")) {
                     if (i != 0) {
-                        var items = line.split(",")
-                        labelNames.push(items[0])
-                        dataValues.push(items[1])
+                        var items = line.split(",");
+                        labelNames.push(items[0]);
+                        dataValues.push(items[1]);
                     } else {
                         i ++
                     }
                 }
-
+                echo(csvString);
+                echo(labelNames);
+                echo(dataValues);
                 // Specify chart data
                 data = {
                     datasets: [{
+                        label: "Amount of water used today /L",
                         data: dataValues
                     }],
                     // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -62,9 +65,9 @@
 
                 // // Auto-update charts
                 // function updateChart(chart) {
-                //     chart.update(0)
+                //     chart.update(0);
                 // }
-                // setTimeout(updateChart(),1000)
+                // setTimeout(updateChart(),1000);
 
                 // OLD (Google Graphs)
                 // transform the CSV string into a 2-dimensional array
