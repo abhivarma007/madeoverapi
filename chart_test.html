@@ -19,32 +19,32 @@
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
         <script type="text/javascript">
-            function getData(filePath) {
-                data = "";
-                $.get(filePath, function(fileContent) {
-                    data = fileContent;
-                });
-                return data;
-            }
-
-            function sortData(data) {
-                // Split CSV string into labels and data values
-                var labelNames = new Array();
-                var dataValues = new Array();
-                var i = 0;
-                var lines = data.split("\n");
-                lines.forEach(function(line) {
-                    if (i != 0 && i != (lines.length - 1)) {
-                        var items = line.split(",");
-                        labelNames.push(items[0]);
-                        dataValues.push(Number(items[1]));
-                    }
-                    i ++;
-                });
-                return [labelNames,dataValues];
-            }
-
             window.onload = function() {
+                function getData(filePath) {
+                    data = "";
+                    $.get(filePath, function(fileContent) {
+                        data = fileContent;
+                    });
+                    return data;
+                }
+
+                function sortData(data) {
+                    // Split CSV string into labels and data values
+                    var labelNames = new Array();
+                    var dataValues = new Array();
+                    var i = 0;
+                    var lines = data.split("\n");
+                    lines.forEach(function(line) {
+                        if (i != 0 && i != (lines.length - 1)) {
+                            var items = line.split(",");
+                            labelNames.push(items[0]);
+                            dataValues.push(Number(items[1]));
+                        }
+                        i ++;
+                    });
+                    return [labelNames,dataValues];
+                }
+
                 var labelsAndData = sortData(getData("/totals/daily.csv"));
                 var labelNames = labelsAndData[0];
                 var dataValues = labelsAndData[1];
