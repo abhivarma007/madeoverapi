@@ -50,7 +50,7 @@
                 var dataValues = labelsAndData[1];
 
                 // Specify chart config options
-                var config = {
+                window.dailyTotalDoughnutChartConfig = {
                     type: "doughnut",
                     data: {
                         datasets: [{
@@ -76,12 +76,12 @@
 
                 // Draw doughnut chart
                 var ctx = document.getElementById("dailyTotalDoughnutChart");
-                window.dailyTotalDoughnutChart = new Chart(ctx, config);
+                window.dailyTotalDoughnutChart = new Chart(ctx, window.dailyTotalDoughnutChartConfig);
             }
             // Auto-update charts
             function updateChart(chart) {
-                config.data.datasets[0].data = sortData(getData("/totals/daily.csv"))[1];
-                config.data.labels = sortData(getData("/totals/daily.csv"))[0];
+                window.dailyTotalDoughnutChartConfig.data.datasets[0].data = sortData(getData("/totals/daily.csv"))[1];
+                window.dailyTotalDoughnutChartConfig.data.labels = sortData(getData("/totals/daily.csv"))[0];
                 chart.update();
             }
             setTimeout(updateChart(window.dailyTotalDoughnutChart),5000);
