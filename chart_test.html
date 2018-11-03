@@ -21,7 +21,7 @@
         <script type="text/javascript">
             window.onload = function() {
                 function getData(filePath) {
-                    data = "";
+                    var data = "";
                     $.get(filePath, function(fileContent) {
                         data = fileContent;
                     });
