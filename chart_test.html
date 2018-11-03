@@ -34,6 +34,7 @@
                         }
                         i ++
                     });
+
                     alert(labelNames);
                     alert(dataValues);
 
@@ -43,7 +44,7 @@
                         data: {
                             datasets: [{
                                 label: "Amount of water used today /L",
-                                backgroundColor: ['#000','#111','#222','#333','#444','#555','#666','#777','#888','#999','#ccc','#ddd','#fff'],
+                                backgroundColor: ['red','#111','yellow','#333','pink','#555','#666','#777','#888','#999','#ccc','#ddd','#fff'],
                                 data: dataValues,
                                 label: "Water usage /L"
                             }],
@@ -65,26 +66,17 @@
                     // Draw doughnut chart
                     var ctx = document.getElementById("dailyTotalDoughnutChart");
                     var dailyTotalDoughnutChart = new Chart(ctx, config);
-
-                    // // Auto-update charts
-                    // function updateChart(chart) {
-                    //     chart.update(0);
-                    // }
-                    // setTimeout(updateChart(),1000);
-
-                    // OLD (Google Graphs)
-                    // transform the CSV string into a 2-dimensional array
-                    // var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-                    // this new DataTable object holds all the data
-                    // var data = new google.visualization.arrayToDataTable(arrayData);
-                    // var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                    // chart.draw(data, options);
                 });
             }
             window.onload = function() {
                 drawDailyTotalChart();
             }
-            // setTimeout(google.setOnLoadCallback(drawVisualization),3000);
+            // Auto-update charts
+            function updateChart(chart) {
+                chart.destroy();
+                drawDailyTotalChart();
+            }
+            setTimeout(updateChart(),5000);
         </script>
     </head>
     <body>
