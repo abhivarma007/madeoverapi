@@ -5,95 +5,37 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <!-- http://t.co/dKP3o1e -->
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
 
         <title>AquaPi | Total Water Usage</title>
         <meta name="description" content="test">
-        <link rel="icon" href="images/logo-round.png">
+        <link rel="icon" href="/images/logo-round.png">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="jquery.csv.min.js"></script>
-        <script src="chart.bundle.min.js"></script>
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script src="/jquery.min.js"></script>
+        <script src="/jquery.csv.min.js"></script>
+        <script src="/chart.bundle.min.js"></script>
+        <script src="/jsapi.js"></script>
+        <script src="/doughnut_charts.js"></script>
 
-        <script type="text/javascript">
+        <script>
+            // only draw charts when page is fully loaded
             window.onload = function() {
-                function sortData(data) {
-                    // Split CSV string into labels and data values
-                    var labelNames = new Array();
-                    var dataValues = new Array();
-                    var i = 0;
-                    var lines = data.split("\n");
-                    lines.forEach(function(line) {
-                        if (i != 0 && i != (lines.length - 1)) {
-                            var items = line.split(",");
-                            labelNames.push(items[0] + " (" + items[1] + "litres)");
-                            dataValues.push(Number(items[1]));
-                        }
-                        i ++;
-                    });
-                    return [labelNames,dataValues];
-                }
+                // draw charts
+                window.bathDailyRateLineChart = drawDoughnutChart("","/totals/daily/global.csv","Today","day")
+                window.bathWeeklyRateLineChart = drawDoughnutChart("","/totals/weekly/global.csv","Past Week","week")
+                window.bathMonthlyRateLineChart = drawDoughnutChart("","/totals/monthly/global.csv","Past Month","month")
 
-                $.get("/totals/daily.csv", function(fileContent) {
-                    var labelsAndData = sortData(fileContent);
-                    var labelNames = labelsAndData[0];
-                    var dataValues = labelsAndData[1];
-
-                    // Specify chart config options
-                    window.dailyTotalDoughnutChartConfig = {
-                        type: "doughnut",
-                        data: {
-                            datasets: [{
-                                label: "Amount of water used today /L",
-                                backgroundColor: ['red','#111','yellow','#333','pink','#555','#666','#777','#888','#999','#ccc','#ddd','#fff'],
-                                data: dataValues,
-                                label: "Water usage /L"
-                            }],
-                            labels: labelNames
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Total Water Usage - Past Week'
-                            },
-                            animation: {
-            			animateScale: true,
-            			animateRotate: true
-            		    },
-			    	tooltips: {
-					enabled: true
-				}
-                        }
-                    }
-
-                    // Draw doughnut chart
-                    var ctx = document.getElementById("dailyTotalDoughnutChart");
-                    window.dailyTotalDoughnutChart = new Chart(ctx, window.dailyTotalDoughnutChartConfig);
-                });
-
-                // Auto-update charts
-                function updateChart(chart,chartConfigOptions,csvFileLocation) {
-                    $.get(csvFileLocation, function(fileContent) {
-			var newData = sortData(fileContent)[1];
-			var newLabels = sortData(fileContent)[0];
-			if (chartConfigOptions.data.datasets[0].data != newData || chartConfigOptions.data.labels != newLabels) {
-				chartConfigOptions.data.datasets[0].data = newData;
-                        	chartConfigOptions.data.labels = newLabels;
-                     		chart.update();
-			}
-                    });
-                }
+                // auto-update charts
                 setInterval(function(){
-			updateChart(window.dailyTotalDoughnutChart,window.dailyTotalDoughnutChartConfig,"/totals/daily.csv");
-		},500);
+        			updateTotalsDoughnutChart(window.globalDailyTotalsDoughnutChart,"/totals/daily/global.csv");
+        			updateTotalsDoughnutChart(window.globalWeeklyTotalsDoughnutChart,"/totals/weekly/global.csv");
+        			updateTotalsDoughnutChart(window.globalMonthlyTotalsDoughnutChart,"/totals/monthly/global.csv");
+        		},500);
             }
         </script>
     </head>
     <body>
-        <canvas id="dailyTotalDoughnutChart"></canvas>
+        <canvas id="dailyTotalTotalsDoughnutChart"></canvas>
     </body>
 </html>

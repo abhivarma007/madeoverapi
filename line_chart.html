@@ -11,87 +11,32 @@
 
         <title>AquaPi | Total Water Usage</title>
         <meta name="description" content="test">
-        <link rel="icon" href="images/logo-round.png">
+        <link rel="icon" href="/images/logo-round.png">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="jquery.csv.min.js"></script>
-        <script src="chart.bundle.min.js"></script>
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script src="/jquery.min.js"></script>
+        <script src="/jquery.csv.min.js"></script>
+        <script src="/chart.bundle.min.js"></script>
+        <script src="/jsapi.js"></script>
+        <script src="/line_charts.js"></script>
 
-        <script type="text/javascript">
+        <script>
+            // only draw charts when page is fully loaded
             window.onload = function() {
-                function sortData(data) {
-                    // Split CSV string into x and y values for line chart
-                    var dataValues = new Array();
-                    var i = 0;
-                    var lines = data.split("\n");
-                    lines.forEach(function(line) {
-			// -1 to account for empty line at the end of each CSV file
-                        if (i != 0 && i != (lines.length - 1)) {
-                            var items = line.split(",");
-                            dataValues.push({x: items[0], y: Number(items[1])});
-                        }
-                        i ++;
-                    });
-                    return dataValues;
-                }
+                // draw charts
+                window.bathDailyRateLineChart = drawLineChart("","/rates/daily/Bath.csv","Today")
+                window.bathWeeklyRateLineChart = drawLineChart("","/rates/weekly/Bath.csv","Past Week")
+                window.bathMonthlyRateLineChart = drawLineChart("","/rates/monthly/Bath.csv","Past Month")
 
-                $.get("/rates/Bath.csv", function(fileContent) {
-                    var dataValues = sortData(fileContent);
-
-                    // Specify chart config options
-                    window.bathRateChartConfig = {
-                        type: "line",
-                        data: {
-                            datasets: [{
-                                data: dataValues,
-                                label: "Water usage rate /[unit]",
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Water Usage Rate - Past Week'
-                            },
-				scales: {
-					xAxes: [{
-						type: 'time',
-						time: {
-							displayFormats: {
-								minute: 'h:mm a'
-							}
-						},
-						ticks: {
-							source: 'auto'
-						},
-						distribution: 'linear',
-						bounds: 'data'
-					}]
-				}
-			}
-                    }
-
-                // Draw line chart
-                var ctx = document.getElementById("bathRateChart");
-                window.bathRateChart = new Chart(ctx, window.bathRateChartConfig);
-            });
-
-                // Auto-update charts
-                function updateChart(chart,chartConfigOptions,csvFileLocation) {
-                    $.get(csvFileLocation, function(fileContent) {
-                        chartConfigOptions.data.datasets[0].data = sortData(fileContent);
-                        chart.update();
-                    });
-                }
+                // auto-update charts
                 setInterval(function(){
-        			updateChart(window.bathRateChart,window.bathRateChartConfig,"/rates/Bath.csv");
+        			updateRateLineChart(window.bathDailyRateLineChart,"/rates/daily/Bath.csv");
+        			updateRateLineChart(window.bathWeeklyRateLineChart,"/rates/weekly/Bath.csv");
+        			updateRateLineChart(window.bathMonthlyRateLineChart,"/rates/monthly/Bath.csv");
         		},500);
             }
         </script>
     </head>
     <body>
-        <canvas id="bathRateChart"></canvas>
+        <canvas id="bathRateRateLineChart"></canvas>
     </body>
 </html>
