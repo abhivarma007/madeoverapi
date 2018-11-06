@@ -22,9 +22,9 @@
             // only draw charts when page is fully loaded
             window.onload = function() {
                 // draw charts
-                window.bathDailyRateLineChart = drawDoughnutChart("","/totals/daily/global.csv","Today","day")
-                window.bathWeeklyRateLineChart = drawDoughnutChart("","/totals/weekly/global.csv","Past Week","week")
-                window.bathMonthlyRateLineChart = drawDoughnutChart("","/totals/monthly/global.csv","Past Month","month")
+                window.bathDailyRateLineChart = drawDoughnutChart("","/totals/daily/global.csv","Today")
+                window.bathWeeklyRateLineChart = drawDoughnutChart("","/totals/weekly/global.csv","Past Week")
+                window.bathMonthlyRateLineChart = drawDoughnutChart("","/totals/monthly/global.csv","Past Month")
 
                 // auto-update charts
                 setInterval(function(){
