@@ -29,7 +29,7 @@
                     lines.forEach(function(line) {
                         if (i != 0 && i != (lines.length - 1)) {
                             var items = line.split(",");
-                            labelNames.push(items[0]);
+                            labelNames.push(items[0] + " (" + items[1] + "litres)");
                             dataValues.push(Number(items[1]));
                         }
                         i ++;
@@ -61,9 +61,12 @@
                                 text: 'Total Water Usage - Past Week'
                             },
                             animation: {
-            					animateScale: true,
-            					animateRotate: true
-            				}
+            			animateScale: true,
+            			animateRotate: true
+            		    },
+			    	tooltips: {
+					enabled: true
+				}
                         }
                     }
 
@@ -75,12 +78,18 @@
                 // Auto-update charts
                 function updateChart(chart,chartConfigOptions,csvFileLocation) {
                     $.get(csvFileLocation, function(fileContent) {
-                        chartConfigOptions.data.datasets[0].data = sortData(fileContent)[1];
-                        chartConfigOptions.data.labels = sortData(fileContent)[0];
-                        chart.update();
+			var newData = sortData(fileContent)[1];
+			var newLabels = sortData(fileContent)[0];
+			if (chartConfigOptions.data.datasets[0].data != newData || chartConfigOptions.data.labels != newLabels) {
+				chartConfigOptions.data.datasets[0].data = newData;
+                        	chartConfigOptions.data.labels = newLabels;
+                     		chart.update();
+			}
                     });
                 }
-                setTimeout(updateChart(window.dailyTotalDoughnutChart,window.dailyTotalDoughnutChartConfig,"/totals/daily.csv"),5000);
+                setInterval(function(){
+			updateChart(window.dailyTotalDoughnutChart,window.dailyTotalDoughnutChartConfig,"/totals/daily.csv");
+		},500);
             }
         </script>
     </head>
