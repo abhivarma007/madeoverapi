@@ -3,25 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0">
+    <meta name="description" content="Demo webpage from AquaPi">
+    <title>Water Usage | AquaPi</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    <link rel="icon" sizes="192x192" href="/images/logo-round.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <meta name="apple-mobile-web-app-title" content="AquaPi">
+    <link rel="apple-touch-icon-precomposed" href="/images/logo-round.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="/images/logo-square.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="/images/logo-round.png">
 
     <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
     <!--
@@ -42,7 +42,48 @@
       margin-bottom: 40px;
       z-index: 900;
     }
+	#global_daily_total_doughnutChart_container, #global_weekly_total_doughnutChart_container, #global_monthly_total_doughnutChart_containet {
+		width: 30%;
+		height: 1000px;
+		margin: 5px;
+	}
     </style>
+
+    <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/jquery.csv.min.js"></script>
+    <script src="/assets/chart.bundle.min.js"></script>
+    <script src="/assets/jsapi.js"></script>
+    <script src="/assets/line_charts.js"></script>
+	<script src="/assets/doughnut_charts.js"></script>
+
+    <script>
+        // only draw charts when page is fully loaded
+        window.onload = function() {
+            // draw center label in middle of doughnut charts, then get data and draw charts
+            drawCenterLabelForDoughnutChart();
+            $.get("/totals/daily/global.csv", function(fileContent) {
+                setConfigOptionsForDoughnutCharts("Today",fileContent);
+                window.global_daily_total_doughnutChart = new Chart(document.getElementById("global_daily_total_doughnutChart"), window.totalsDoughnutChartConfig);
+            });
+            drawCenterLabelForDoughnutChart();
+            $.get("/totals/weekly/global.csv", function(fileContent) {
+                setConfigOptionsForDoughnutCharts("Past Week",fileContent);
+                window.global_weekly_total_doughnutChart = new Chart(document.getElementById("global_weekly_total_doughnutChart"), window.totalsDoughnutChartConfig);
+            });
+            drawCenterLabelForDoughnutChart();
+            $.get("/totals/monthly/global.csv", function(fileContent) {
+                setConfigOptionsForDoughnutCharts("Past Month",fileContent);
+                window.global_monthly_total_doughnutChart = new Chart(document.getElementById("global_monthly_total_doughnutChart"), window.totalsDoughnutChartConfig);
+            });
+
+            // auto-update charts
+            setInterval(function(){
+                updateTotalsDoughnutChart(window.global_daily_total_doughnutChart,"/totals/daily/global.csv");
+                updateTotalsDoughnutChart(window.global_weekly_total_doughnutChart,"/totals/weekly/global.csv");
+                updateTotalsDoughnutChart(window.global_monthly_total_doughnutChart,"/totals/monthly/global.csv");
+            },500);
+        }
+    </script>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -86,22 +127,17 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-            <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <use xlink:href="#piechart" mask="url(#piemask)" />
-              <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan font-size="0.2" dy="-0.07">%</tspan></text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <use xlink:href="#piechart" mask="url(#piemask)" />
-              <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <use xlink:href="#piechart" mask="url(#piemask)" />
-              <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <use xlink:href="#piechart" mask="url(#piemask)" />
-              <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-            </svg>
+            <!-- DOUGHNUT CHARTS START -->
+            <div id="global_daily_total_doughnutChart_container">
+                <canvas id="global_daily_total_doughnutChart"></canvas>
+            </div>
+            <div id="global_weekly_total_doughnutChart_container">
+                <canvas id="global_weekly_total_doughnutChart"></canvas>
+            </div>
+            <div id="global_monthly_total_doughnutChart_container">
+                <canvas id="global_monthly_total_doughnutChart"></canvas>
+            </div>
+            <!-- DOUGHNUT CHARTS END -->
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
             <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">

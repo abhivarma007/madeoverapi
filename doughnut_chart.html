@@ -21,17 +21,22 @@
         <script>
             // only draw charts when page is fully loaded
             window.onload = function() {
-                // draw charts
-                window.bathDailyRateLineChart = drawDoughnutChart("","/totals/daily/global.csv","Today")
+                // draw label in middle of  doughnut chart
+                drawCenterLabelForDoughnutChart();
+                // get data and draw charts
+                $.get("/totals/daily/global.csv", function(fileContent) {
+                    setConfigOptionsForDoughnutCharts("Today",fileContent);
+                    window.global_daily_total_doughnutChart = new Chart(document.getElementById("global_daily_total_doughnutChart"), window.totalsDoughnutChartConfig);
+                });
 
                 // auto-update charts
                 setInterval(function(){
-        			updateTotalsDoughnutChart(window.globalDailyTotalsDoughnutChart,"/totals/daily/global.csv");
-        		},500);
+                    updateTotalsDoughnutChart(window.global_daily_total_doughnutChart,"/totals/daily/global.csv");
+                },500);
             }
         </script>
     </head>
     <body>
-        <canvas id="dailyTotalTotalsDoughnutChart"></canvas>
+        <canvas id="global_daily_total_doughnutChart"></canvas>
     </body>
 </html>

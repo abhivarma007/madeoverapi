@@ -22,49 +22,44 @@ dataTimePeriod is:
     Past Week
     Past Month
 */
-function drawLineChart(chartLocationID,csvFileLocation,dataTimePeriod) {
-    // retrieve data from CSV file
-    $.get(csvFileLocation, function(fileContent) {
-        var dataValues = sortDataForLineChart(fileContent);
+function setConfigOptionsForLineCharts(dataTimePeriod,fileContent) {
+    var dataValues = sortDataForLineChart(fileContent);
 
-        // specify chart config options
-        window.rateLineChartConfig = {
-            type: "line",
-            data: {
-                datasets: [{
-                    data: dataValues,
-                    label: "Water usage rate /[unit]",
-                    fill: true
-                }]
+    // specify chart config options
+    window.rateLineChartConfig = {
+        type: "line",
+        data: {
+            datasets: [{
+                data: dataValues,
+                label: "Water usage rate /[unit]",
+                fill: true,
+                borderColor: "#bf360c",
+                backgroundColor: "#009688"
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Water Usage Rate - ' + dataTimePeriod
             },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Water Usage Rate - ' + dataTimePeriod
-                },
-                scales: {
-                    xAxes: [{
-                        type: 'time',
-                        time: {
-                            displayFormats: {
-                                minute: 'h:mm a'
-                            }
-                        },
-                        ticks: {
-                            source: 'auto'
-                        },
-                        distribution: 'linear',
-                        bounds: 'data'
-                    }]
-                }
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                            minute: 'h:mm a'
+                        }
+                    },
+                    ticks: {
+                        source: 'auto'
+                    },
+                    distribution: 'linear',
+                    bounds: 'data'
+                }]
             }
         }
-
-        // specify place to draw chart
-        var ctx = document.getElementById(chartLocationID);
-        return new Chart(ctx, window.rateLineChartConfig);
-    });
+    }
 }
 
 // function for auto-updating doughnut charts
