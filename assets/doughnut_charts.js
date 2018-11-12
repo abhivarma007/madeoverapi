@@ -8,7 +8,7 @@ function sortDataForTotalsDoughnutChart(data) {
     lines.forEach(function(line) {
         if (i != 0 && i != (lines.length - 1)) {
             var items = line.split(",");
-            labelNames.push(items[0] + " (" + items[1] + "litres)");
+            labelNames.push(items[0] + " (" + items[1] + " litres)");
             dataValues.push(Number(items[1]));
         }
         i ++;
@@ -55,20 +55,33 @@ function setConfigOptionsForDoughnutCharts(dataTimePeriod,fileContent) {
         },
         options: {
             responsive: true,
-		maintainAspectRatio: false,
+            maintainAspectRatio: false,
             title: {
                 display: true,
                 text: 'Total Water Usage - ' + dataTimePeriod
             },
-			legend: {
-				position: 'bottom'
-			},
+            legendCallback: function(chart) {
+                //console.log(chart.data);
+                //var text = "";
+                //text += '<ul>';
+                //for (var i=0; i<chart.data.datasets[0].data.length; i++) {
+                    //text += '<li>Hello World';
+                    //text.push('<span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">' + chart.data.datasets[0].data[i] + '</span>');
+                    //if (chart.data.labels[i]) {
+                    //    text.push(chart.data.labels[i]);
+                    //}
+                    //text += '</li>';
+                //}
+                //text += '</ul>';
+                //return text;
+			return "hello world";
+            },
             animation: {
                 animateScale: true,
                 animateRotate: true
             },
             tooltips: {
-                enabled: true
+                enabled: false
             },
             elements: {
                 center: {
