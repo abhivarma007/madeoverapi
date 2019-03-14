@@ -32,63 +32,10 @@
     <link rel="stylesheet" href="/assets/material_icons.css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="/styles.css">
-    <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
-	#global_daily_total_doughnutChart_container, #global_weekly_total_doughnutChart_container, #global_monthly_total_doughnutChart_container {
-		width: 30%;
-		height: 1000px;
-		margin: 5px;
-	}
-	#totals_doughnutChart_legend {
-		width: 100%;
-	}
-    </style>
 
-    <script src="/assets/jquery.min.js"></script>
-    <script src="/assets/jquery.csv.min.js"></script>
-    <script src="/assets/chart.bundle.min.js"></script>
-    <script src="/assets/jsapi.js"></script>
-    <script src="/assets/line_charts.js"></script>
-	<script src="/assets/doughnut_charts.js"></script>
-
-    <script>
-        // only draw charts when page is fully loaded
-        window.onload = function() {
-            // draw center label in middle of doughnut charts, then get data and draw charts
-            drawCenterLabelForDoughnutChart();
-            $.get("/totals/daily/global.csv", function(fileContent) {
-                setConfigOptionsForDoughnutCharts("Today",fileContent);
-                window.global_daily_total_doughnutChart = new Chart(document.getElementById("global_daily_total_doughnutChart"), window.totalsDoughnutChartConfig);
-            });
-            drawCenterLabelForDoughnutChart();
-            $.get("/totals/weekly/global.csv", function(fileContent) {
-                setConfigOptionsForDoughnutCharts("Past Week",fileContent);
-                window.global_weekly_total_doughnutChart = new Chart(document.getElementById("global_weekly_total_doughnutChart"), window.totalsDoughnutChartConfig);
-            });
-            drawCenterLabelForDoughnutChart();
-            $.get("/totals/monthly/global.csv", function(fileContent) {
-                setConfigOptionsForDoughnutCharts("Past Month",fileContent);
-                window.global_monthly_total_doughnutChart = new Chart(document.getElementById("global_monthly_total_doughnutChart"), window.totalsDoughnutChartConfig);
-            });
-
-            document.getElementById("totals_doughnutChart_legend").innerHTML = window.global_daily_total_doughnutChart.generateLabels();
-
-            // auto-update charts
-            setInterval(function(){
-                updateTotalsDoughnutChart(window.global_daily_total_doughnutChart,"/totals/daily/global.csv");
-                updateTotalsDoughnutChart(window.global_weekly_total_doughnutChart,"/totals/weekly/global.csv");
-                updateTotalsDoughnutChart(window.global_monthly_total_doughnutChart,"/totals/monthly/global.csv");
-            },500);
-        }
-    </script>
+    <!-- <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/jquery.csv.min.js"></script> -->
+    <script src="/assets/apexcharts.js"></script>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -133,16 +80,45 @@
         <div class="mdl-grid demo-content">
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
             <!-- DOUGHNUT CHARTS START -->
-            <div id="global_daily_total_doughnutChart_container">
-                <canvas id="global_daily_total_doughnutChart"></canvas>
-            </div>
-            <div id="global_weekly_total_doughnutChart_container">
-                <canvas id="global_weekly_total_doughnutChart"></canvas>
-            </div>
-            <div id="global_monthly_total_doughnutChart_container">
-                <canvas id="global_monthly_total_doughnutChart"></canvas>
-            </div>
-            <div id="totals_doughnutChart_legend"></div>
+
+            <div id="global_daily_total_doughnutChart_container"></div>
+
+            <script>
+                var options = {
+                    chart: {
+                        width: 380,
+                        type: 'donut',
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    series: [44, 55, 13, 33],
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 200
+                            },
+                            legend: {
+                                show: false
+                            }
+                        }
+                    }],
+                    legend: {
+                        position: 'right',
+                        offsetY: 0,
+                        height: 230,
+                    }
+                }
+
+                var chart = new ApexCharts(
+                    document.querySelector("#global_daily_total_doughnutChart_container"),
+                    options
+                );
+
+                chart.render()
+            </script>
+
             <!-- DOUGHNUT CHARTS END -->
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
