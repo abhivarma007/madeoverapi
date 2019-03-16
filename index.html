@@ -88,7 +88,7 @@
             <!-- CHARTS START -->
 
             <div id="global_daily_total"></div>
-            <div id="global_daily_rate"></div>
+            <div id="Bath_daily_rate"></div>
 
             <script>
                 // function for sorting CSV data for charts displaying totals
@@ -127,11 +127,8 @@
                 function updateTotals(chart, currentSegment, csvFileLocation) {
                     // retrieve new data
                     $.get(csvFileLocation, function(fileContent) {
-                        // format data for use in chart
-                        var chartData = sortTotalsData(fileContent);
-
-                        // change data on chart
-                        chart.setData(chartData);
+                        // change data on chart to correctly-formatted new data
+                        chart.setData(sortTotalsData(fileContent));
                         // select the previously selected segment
                         chart.select(currentSegment.value);
 
@@ -195,6 +192,15 @@
                     return chartData;
                 }
 
+                // function for auto-updating doughnut charts
+                function updateRates(chart, csvFileLocation) {
+                    // retrieve new data
+                    $.get(csvFileLocation, function(fileContent) {
+                        // change data on chart to correctly-formatted new data
+                        chart.setData(sortRatesData(fileContent));
+                    });
+                }
+
                 // function for compiling options for chart configuration
                 function getRatesOptions(fileContent, chartTarget) {
                     // return config options including correctly-formatted data
@@ -233,12 +239,13 @@
                     // retrieve data
                     $.get("/rates/daily/Bath.csv", function(fileContent) {
                         // define charttotals
-                        window.global_daily_rate = Morris.Line(getRatesOptions(fileContent, 'global_daily_rate'));
+                        window.Bath_daily_rate = Morris.Line(getRatesOptions(fileContent, 'Bath_daily_rate'));
                     });
 
                     // auto-update charts
                     setInterval(function(){
                         updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily/global.csv");
+                        updateRates(window.Bath_daily_rate, "/rates/daily/Bath.csv");
                     },1000);
                 }
             </script>
