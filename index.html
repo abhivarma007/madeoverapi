@@ -23,18 +23,9 @@
 
     <link rel="shortcut icon" href="/images/logo-round.png">
 
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--for (i=0; i < window.global_daily_total.segments.length; i++) {
-                        window.global_daily_total.segments [i].handlers["hover"].push( function(i) {
-                            window.global_daily_total.currentSegment = i;
-                        });
-                    }
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="/assets/material_icons.css">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="/assets/material-theme.min.css">
     <link rel="stylesheet" href="/styles.css">
 
     <script src="/assets/jquery.min.js"></script>
@@ -73,22 +64,54 @@
           <div class="demo-avatar-dropdown">
             <span>Sample Household</span>
           </div>
-        </header>
+      </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Overview</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Messages</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Overview</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Messages</a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
           <div class="mdl-layout-spacer"></div>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="mdl-grid">
+          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-card" id="totals-charts">
             <!-- CHARTS START -->
 
-            <div id="global_daily_total"></div>
-            <div id="Bath_daily_rate"></div>
+            <h2 class="chart-group-heading">Totals</h1>
+            <div class="chart-container">
+                <center><h3 class="chart-title">Today</h3></center>
+                <div class="chart" id="global_daily_total"></div>
+            </div>
+
+            <style>
+                .demo-layout .demo-navigation .mdl-navigation__link {
+                    -webkit-transition: background-color 1s, color 1s;
+                    transition: background-color 0.2s, color 0.2s;
+                }
+                .chart tspan {
+                    font-family: 'Roboto';
+                }
+                #totals-charts .chart-container {
+                    padding: 7px;
+                    display: inline-block;
+                        width: calc(33% - 14px);
+                }
+                .mdl-card {
+                    padding: 15px;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    margin: 0;
+                }
+                .chart-group-heading {
+                    margin: auto;
+                }
+                .chart-title {
+                    color: #37474f;
+                    font-style: italic;
+                    margin-bottom: -25px;
+                }
+            </style>
 
             <script>
                 // function for sorting CSV data for charts displaying totals
@@ -234,7 +257,10 @@
                         // define chart
                         window.global_daily_total = Morris.Donut(getTotalsOptions(fileContent, 'global_daily_total'));
                         // define variable for currently selected segment (a number)
-                        window.global_daily_total_currentSegment = { value: 0 }
+                        window.global_daily_total_currentSegment = { value: 0 };
+                        // select iteam that will automatically be selected when chart is refreshed, if no other segments have been
+                        // hovered over yet, to avoid unexpected segment selection alteration when chart refreshes for first time
+                        window.global_daily_total.select(0);
                     });
                     // retrieve data
                     $.get("/rates/daily/Bath.csv", function(fileContent) {
@@ -253,12 +279,10 @@
             <!-- CHARTS END -->
           </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart" />
-            </svg>
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart" />
-            </svg>
+
+            <!-- LINE CHART START -->
+            <div class="chart-container"><div class="chart" id="Bath_daily_rate"></div></div>
+            <!-- LINE CHART END -->
           </div>
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
