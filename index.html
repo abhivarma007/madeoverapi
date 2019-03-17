@@ -80,7 +80,7 @@
             <main class="mdl-layout__content mdl-color--grey-100">
                 <div class="mdl-grid demo-content">
                     <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-card" id="totals-charts">
-                        <!-- CHARTS START -->
+                        <!-- CHARTS START
                         <h2 class="chart-group-heading">Totals</h2>
                         <div class="chart-container">
                             <center><h3 class="chart-title">Today</h3></center>
@@ -93,76 +93,10 @@
                         <div class="chart-container">
                             <center><h3 class="chart-title">This Month</h3></center>
                             <div class="chart" id="global_monthly_total"></div>
-                        </div>
+                        </div>-->
+                        <span>test</span><!--
+                        --><span>test</span>
 
-                        <style>
-                            .demo-layout .demo-navigation .mdl-navigation__link {
-                                -webkit-transition: background-color 1s, color 1s;
-                                transition: background-color 0.2s, color 0.2s;
-                            }
-                            .chart tspan {
-                                font-family: 'Roboto';
-                            }
-                            #totals-charts .chart-container {
-                                padding: 7px;
-                                display: inline-block;
-                                width: calc(33% - 14px);
-                            }
-                            .mdl-card {
-                                padding: 15px;
-                            }
-                            h1, h2, h3, h4, h5, h6 {
-                                margin: 0;
-                            }
-                            .chart-group-heading {
-                                margin: auto;
-                            }
-                            .chart-title {
-                                color: #37474f;
-                                font-style: italic;
-                                margin-bottom: -25px;
-                            }
-                        </style>
-
-                        <script>
-                            window.onload = function() {
-                                // only first doughnut chart initiation code is commented, as the code is the same for each one (apert from chart variable names)
-                                // retrieve data
-                                $.get("/totals/daily/global.csv", function(fileContent) {
-                                    // define chart
-                                    window.global_daily_total = Morris.Donut(getTotalsOptions(fileContent, 'global_daily_total'));
-                                    // define variable for currently selected segment (a number)
-                                    window.global_daily_total_currentSegment = { value: 0 };
-                                    // select iteam that will automatically be selected when chart is refreshed, if no other segments have been
-                                    // hovered over yet, to avoid unexpected segment selection alteration when chart refreshes for first time
-                                    window.global_daily_total.select(0);
-                                });
-                                $.get("/totals/weekly/global.csv", function(fileContent) {
-                                    window.global_weekly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_weekly_total'));
-                                    window.global_weekly_total_currentSegment = { value: 0 };
-                                    window.global_weekly_total.select(0);
-                                });
-                                $.get("/totals/monthly/global.csv", function(fileContent) {
-                                    window.global_monthly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_monthly_total'));
-                                    window.global_monthly_total_currentSegment = { value: 0 };
-                                    window.global_monthly_total.select(0);
-                                });
-
-                                // retrieve data
-                                $.get("/rates/daily/Bath.csv", function(fileContent) {
-                                    // define charttotals
-                                    window.Bath_daily_rate = Morris.Line(getRatesOptions(fileContent, 'Bath_daily_rate'));
-                                });
-
-                                // auto-update charts
-                                setInterval(function(){
-                                    updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily/global.csv");
-                                    updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly/global.csv");
-                                    updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly/global.csv");
-                                    updateRates(window.Bath_daily_rate, "/rates/daily/Bath.csv");
-                                },1000);
-                            }
-                        </script>
 
                         <!-- CHARTS END -->
                     </div>
@@ -274,4 +208,84 @@
         </svg>
         <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     </body>
+    <style>
+        .demo-layout .demo-navigation .mdl-navigation__link {
+            -webkit-transition: background-color 1s, color 1s;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .chart tspan {
+            font-family: 'Roboto';
+        }
+        #totals-charts .chart-container {
+            padding: 7px;
+            display: inline-block;
+            width: calc(33% - 14px);
+        }
+        .mdl-card {
+            padding: 15px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+        .chart-group-heading {
+            margin: auto;
+        }
+        .chart-title {
+            color: #37474f;
+            font-style: italic;
+            margin-bottom: -25px;
+        }
+        .chart {
+            width: 100%;
+        }
+        #totals-charts span {
+            display: inline-block;
+            white-space: normal;
+            width: 25%;
+        }
+        #totals-charts {we
+            white-space: nowrap;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            // only first doughnut chart initiation code is commented, as the code is the same for each one (apert from chart variable names)
+            // retrieve data
+            $.get("/totals/daily/global.csv", function(fileContent) {
+                // define chart
+                window.global_daily_total = Morris.Donut(getTotalsOptions(fileContent, 'global_daily_total'));
+                // define variable for currently selected segment (a number)
+                window.global_daily_total_currentSegment = { value: 0 };
+                // select iteam that will automatically be selected when chart is refreshed, if no other segments have been
+                // hovered over yet, to avoid unexpected segment selection alteration when chart refreshes for first time
+                window.global_daily_total.select(0);
+            });
+            $.get("/totals/weekly/global.csv", function(fileContent) {
+                window.global_weekly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_weekly_total'));
+                window.global_weekly_total_currentSegment = { value: 0 };
+                window.global_weekly_total.select(0);
+            });
+            $.get("/totals/monthly/global.csv", function(fileContent) {
+                window.global_monthly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_monthly_total'));
+                window.global_monthly_total_currentSegment = { value: 0 };
+                window.global_monthly_total.select(0);
+            });
+
+            // retrieve data
+            $.get("/rates/daily/Bath.csv", function(fileContent) {
+                // define charttotals
+                window.Bath_daily_rate = Morris.Line(getRatesOptions(fileContent, 'Bath_daily_rate'));
+            });
+
+            // auto-update charts
+            setInterval(function(){
+                updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily/global.csv");
+                updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly/global.csv");
+                updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly/global.csv");
+                updateRates(window.Bath_daily_rate, "/rates/daily/Bath.csv");
+            },1000);
+        }
+    </script>
 </html>
