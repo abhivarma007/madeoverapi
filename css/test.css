@@ -1,0 +1,90 @@
+.demo-layout .demo-navigation .mdl-navigation__link {
+    -webkit-transition: background-color 1s, color 1s;
+    transition: background-color 0.2s, color 0.2s;
+}
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding: 16px 25px;
+}
+.chart tspan {
+    font-family: 'Roboto';
+}
+#totals-charts .chart-container {
+    padding: 7px;
+    display: inline-block;
+    width: calc(33% - 14px);
+    text-align: center;
+}
+.mdl-card {
+    padding: 15px;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+.chart-group-heading {
+    display: block;
+}
+.chart-title {
+    color: #37474f;
+    margin: 10px auto -10px auto;
+}
+#totals-charts .chart, #totals-charts .chart svg {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+.demo-cards .demo-separator {
+    height: 16px;
+}
+.charts {
+    text-align: center;
+    padding: 10px;
+}
+#rates-charts .chart, #rates-charts .chart svg {
+    width: 100%;
+}
+@media screen and (max-width: 850px) {
+    #totals-charts .chart-container {
+        width: calc(49.5% - 14px);
+    }
+}
+@media screen and (max-width: 650px) {
+    #totals-charts .chart-container {
+        width: calc(100% - 14px);
+    }
+}
+
+.mdl-drawer, .mdl-layout__header {
+    background-color: #1a1a1a;
+    color: #eeeeee;
+}
+.demo-layout .mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    color: #eeeeee;
+}
+html {
+    color: #1a1a1a;
+}
+.drawer-header {
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    padding: 16px;
+    height: 200px;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.drawer-header .drawer-header-company-name {
+    margin-bottom: 10px;
+}
+.drawer-header .drawer-header-company-icon {
+    width: 110px;
+    height: 110px;
+    border-radius: 24px;
+}
