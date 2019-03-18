@@ -40,16 +40,12 @@
         width: calc(100% - 14px);
     }
 }
-
-#totals-charts .chart svg text::after {
-    content: "L";
-}
 /* totals charts END */
 
 /* rates charts START */
 /* style tooltips for points on line graphs */
 .morris-hover.morris-default-style {
-    background: var(--background-color)ee;
+    background: var(--background-color);
     color: var(--text-color);
 }
 /* rates charts END */
