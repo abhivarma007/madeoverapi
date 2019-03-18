@@ -1,6 +1,13 @@
+:root {
+    /* create variables for theme */
+    --text-color: #eeeeee;
+    --background-color: #1a1a1a;
+    --theme-color: #006dcc;
+}
+
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
-    color: #eeeeee;
+    color: var(--text-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -8,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 main {
-    background: #1a1a1a;
+    background: var(--background-color);
 }
 
 main > div {
@@ -26,12 +33,12 @@ main > div {
 }
 
 .mdl-drawer, .mdl-layout__header {
-    background-color: #1a1a1a;
-    color: #eeeeee;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .mdl-layout .mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-    color: #eeeeee;
+    color: var(--text-color);
 }
 
 .drawer-header {
@@ -88,7 +95,7 @@ main > div {
 }
 
 .mdl-layout .mdl-navigation .mdl-navigation__link:hover, .mdl-layout .mdl-navigation .mdl-navigation__link--activated {
-    background-color: #006DCC;
+    background-color: var(--theme-color);
 }
 
 .mdl-navigation {
@@ -110,7 +117,7 @@ main > div {
 
 /* seach box helper text START */
 .mdl-textfield__label {
-    color: #eeeeee;
+    color: var(--text-color);
 }
 /* seach box helper text END */
 /* Safari (iOS) workaround START */
@@ -134,7 +141,7 @@ main > div {
 }
 
 .mdl-card__actions.mdl-card--border {
-    border-top: 1px solid #eeeeee44;
+    border-top: 1px solid var(--text-color)44;
 }
 
 .mdl-card__content {
@@ -147,9 +154,9 @@ main > div {
 /* MDL Cards END */
 
 .mdl-button {
-    color: #eeeeee;
+    color: var(--text-color);
 }
 
 .mdl-ripple {
-    background: #1a1a1a;
+    background: var(--background-color);
 }

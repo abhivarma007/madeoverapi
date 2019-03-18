@@ -49,8 +49,8 @@
 /* rates charts START */
 /* style tooltips for points on line graphs */
 .morris-hover.morris-default-style {
-    background: #1a1a1aee;
-    color: #eeeeee;
+    background: var(--background-color)ee;
+    color: var(--text-color);
 }
 /* rates charts END */
 

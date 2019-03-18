@@ -57,9 +57,9 @@ function getRatesOptions(fileContent, chartTarget) {
         behaveLikeLine: true,
         resize: false,
         pointSize: 2,
-        pointFillColors:['#eeeeee'],
-        pointStrokeColors: ['#1a1a1a'],
-        lineColors:['#006dcc'],
+        pointFillColors: [window.text_color],
+        pointStrokeColors: [window.background_color],
+        lineColors: [window.theme_color],
         smooth: true,
         gridTextColor: '#eee'
   }
