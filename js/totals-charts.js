@@ -71,6 +71,7 @@ function getTotalsOptions(fileContent, chartTarget) {
         resize: false,
         // segment colours
         colors: getRainbow(chartData.length),
-        labelColor: '#d9d9d9'
+        labelColor: '#eeeeee',
+        formatter: function (y) { return y + "L" }
     }
 }

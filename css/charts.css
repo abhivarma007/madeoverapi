@@ -40,6 +40,10 @@
         width: calc(100% - 14px);
     }
 }
+
+#totals-charts .chart svg text::after {
+    content: "L";
+}
 /* totals charts END */
 
 /* rates charts START */
