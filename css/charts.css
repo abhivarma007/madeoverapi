@@ -1,0 +1,62 @@
+.charts {
+    text-align: center;
+    padding: 10px;
+}
+
+.chart-group-heading {
+    display: block;
+    margin: 0 0 -10px 0;
+}
+
+.chart-title {
+    color: #dbdbdb;
+    margin: 20px auto -10px auto;
+}
+
+.chart, .chart svg {
+    width: 100%;
+    margin: auto;
+}
+
+.chart tspan {
+    font-family: 'Roboto';
+}
+
+/* totals charts START */
+#totals-charts .chart-container {
+    padding: 7px;
+    display: inline-block;
+    width: calc(32.9% - 14px);
+    text-align: center;
+}
+
+@media screen and (max-width: 850px) {
+    #totals-charts .chart-container {
+        width: calc(49.5% - 14px);
+    }
+}
+@media screen and (max-width: 650px) {
+    #totals-charts .chart-container {
+        width: calc(100% - 14px);
+    }
+}
+/* totals charts END */
+
+/* rates charts START */
+/* style tooltips for points on line graphs */
+.morris-hover.morris-default-style {
+    background: #1a1a1aee;
+    color: #eeeeee;
+}
+/* rates charts END */
+
+/* div containing MDL cards with tips START */
+.tips {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+}
+/* div containing MDL cards with tips END */

@@ -23,43 +23,55 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <title>Traqua Dashboard</title>
 
-        <!-- Add to homescreen for Chrome on Android -->
+        <!-- add to homescreen for Chrome (Android) -->
         <meta name="mobile-web-app-capable" content="yes">
         <link rel="icon" sizes="192x192" href="/images/icon-round.png">
 
-        <!-- Add to homescreen for Safari on iOS -->
+        <!-- add to homescreen for Safari (iOS) -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-title" content="Traqua Dashboard">
         <link rel="apple-touch-icon-precomposed" href="/images/icon-round.png">
 
-        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <!-- tile icon for Windows 8 (144x144 + tile color) -->
         <meta name="msapplication-TileImage" content="/images/icon-square.png">
         <meta name="msapplication-TileColor" content="#1a1a1a">
 
+        <!-- main icon -->
         <link rel="shortcut icon" href="/images/logo-round.png">
 
+        <!-- import Roboto (font) -->
         <link rel="stylesheet" href="/css/roboto.css">
-        <link rel="stylesheet" href="/css/material_icons.css">
-        <link rel="stylesheet" href="/css/material-theme.min.css">
-        <link rel="stylesheet" href="/css/styles.css">
 
+        <!-- import Material Design dependencies & Material Icons -->
+        <script src="/js/material.min.js"></script>
+        <link rel="stylesheet" href="/css/material-theme.min.css">
+        <link rel="stylesheet" href="/css/material_icons.css">
+
+        <!-- import jQuery & jQuery CSV -->
         <script src="/js/jquery.min.js"></script>
         <script src="/js/jquery.csv.min.js"></script>
+
+        <!-- import chart dependicies -->
         <script src="/js/morris.min.js"></script>
         <script src="/js/raphael.min.js"></script>
         <link rel="stylesheet" href="/css/morris.css">
-
         <script src="/js/rates-charts.js"></script>
         <script src="/js/totals-charts.js"></script>
-        <link rel="stylesheet" href="/css/test.css">
-        <script src="/js/test.js"></script>
-        <script src="/js/material.min.js"></script>
+        <link rel="stylesheet" href="/css/charts.css">
+        <!-- import Palette JS, for rainbow colours on charts -->
         <script src="/js/palette.js"></script>
+
+        <!-- import global styling & scripts -->
+        <link rel="stylesheet" href="/css/global.css">
+        <script src="/js/global.js"></script>
+
+        <!-- import page-specific styling & scripts -->
+        <script src="/js/test.js"></script>
     </head>
     <body>
-        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-            <header class="demo-header mdl-layout__header">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title">Water Usage | Dashboard</span>
                     <div class="mdl-layout-spacer"></div>
@@ -69,7 +81,7 @@
                         </label>
                         <div class="mdl-textfield__expandable-holder">
                             <input class="mdl-textfield__input" type="text" id="search">
-                            <label class="mdl-textfield__label" for="search">Enter your query...</label>
+                            <label class="mdl-textfield__label" for="search">Search...</label>
                         </div>
                     </div>
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
@@ -82,13 +94,13 @@
                     </ul>
                 </div>
             </header>
-            <div class="mdl-drawer demo-drawer mdl-layout__drawer">
+            <div class="mdl-drawer mdl-layout__drawer">
                 <header class="drawer-header">
                     <img src="/images/logo-round.png" class="drawer-header-company-icon">
                     <h5 class="drawer-header-company-name">Traqua</h5>
                     <h5>Water Usage Tracking</h5>
                 </header>
-                <nav class="demo-navigation mdl-navigation">
+                <nav class="mdl-navigation">
                     <a class="mdl-navigation__link mdl-navigation__link--activated" href=""><i class="material-icons" role="presentation">data_usage</i>Dashboard</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">inbox</i>Inbox</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">delete</i>Trash</a>
@@ -97,8 +109,8 @@
                 </nav>
             </div>
             <main class="mdl-layout__content">
-                <div class="mdl-grid demo-content">
-                    <div id="totals-charts" class="charts mdl-card demo-charts mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                <div class="mdl-grid">
+                    <div id="totals-charts" class="charts mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                         <div class="mdl-card__content">
                             <!-- CHARTS START -->
                             <h3 class="chart-group-heading">Totals</h3>
@@ -118,7 +130,7 @@
                         </div>
                     </div>
 
-                    <div id="rates-charts" class="charts mdl-card demo-graphs mdl-shadow--2dp mdl-cell mdl-cell--8-col">
+                    <div id="rates-charts" class="charts mdl-card mdl-shadow--2dp mdl-cell mdl-cell--8-col">
                         <div class="mdl-card__content">
                             <!-- CHARTS START -->
                             <h3 class="chart-group-heading">Usage Rates</h3>
@@ -147,7 +159,7 @@
                             </div>
                         </div>
                         <div class="card-separator mdl-cell--1-col"></div>
-                        <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+                        <div class="checkboxes mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
                             <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
                                 <h3>View options</h3>
                                 <ul>

@@ -1,0 +1,200 @@
+html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    color: #eeeeee;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+main {
+    background: #1a1a1a;
+}
+
+main > div {
+  max-width: 1080px;
+}
+
+/* navbar & header START */
+.mdl-layout .mdl-navigation .mdl-navigation__link {
+    -webkit-transition: background-color 1s, color 1s;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    padding: 16px 25px;
+}
+
+.mdl-drawer, .mdl-layout__header {
+    background-color: #1a1a1a;
+    color: #eeeeee;
+}
+
+.mdl-layout .mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    color: #eeeeee;
+}
+
+.drawer-header {
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    padding: 16px;
+    height: 200px;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.drawer-header .drawer-header-company-name {
+    margin-bottom: 10px;
+}
+
+.drawer-header .drawer-header-company-icon {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 16px;
+}
+
+.mdl-drawer {
+    border: none;
+}
+
+.mdl-drawer .mdl-menu .mdl-menu__item {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.mdl-layout .mdl-navigation .mdl-navigation__link {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.mdl-layout .mdl-navigation .mdl-navigation__link:hover, .mdl-layout .mdl-navigation .mdl-navigation__link--activated {
+    background-color: #006DCC;
+}
+
+.mdl-navigation {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.mdl-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    margin-right: 32px;
+}
+
+.mdl-card .mdl-card__title.mdl-card__title {
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+/* seach box helper text START */
+.mdl-textfield__label {
+    color: #eeeeee;
+}
+/* seach box helper text END */
+/* Safari (iOS) workaround START */
+.mdl-drawer .mdl-menu__container {
+    z-index: -1;
+}
+.mdl-drawer .mdl-navigation {
+    z-index: -2;
+}
+/* Safari (iOS) workaround END */
+/* navabr & header END */
+
+/* MDL Cards START */
+.mdl-card {
+    background: #333;
+    display: block;
+}
+
+.mdl-card__title {
+    color: inherit;
+}
+
+.mdl-card__actions.mdl-card--border {
+    border-top: 1px solid #eeeeee44;
+}
+
+.mdl-card__content {
+    padding: 10px;
+}
+
+.card-separator {
+    height: 16px;
+}
+/* MDL Cards END */
+
+.mdl-button {
+    color: #eeeeee;
+}
+
+.mdl-ripple {
+    background: #1a1a1a;
+}
+
+
+
+
+
+
+#totals-charts .chart svg text:nth-of-type(2)::after {
+    content: "L";
+}
+
+
+
+
+
+.mdl-card.water-tips .mdl-card__title {
+    height: 200px;
+}
+.mdl-card.water-tips {
+    background-color: #006dcc;
+    background-image: url("/images/water-tips.png");
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+.checkboxes .mdl-checkbox__box-outline {
+    border-color: rgba(255, 255, 255, 0.89);
+}
+.checkboxes ul {
+    list-style-type: none;
+}
+.checkboxes .mdl-card__actions {
+    height: 64px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
