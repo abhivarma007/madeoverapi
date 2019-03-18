@@ -1,3 +1,13 @@
+// function for getting an array of colour values that create a rainbow, to make doughnut charts look nice
+function getRainbow(size) {
+    var rainbow = []
+    // hash is not included by palette.js (which creates the array), so it is added here
+    palette('tol-rainbow', size).forEach(function(colour) {
+        rainbow.push("#" + colour);
+    });
+    return rainbow;
+}
+
 // function for sorting CSV data for charts displaying totals
 function sortTotalsData(data) {
     // define variables used later on
@@ -59,12 +69,7 @@ function getTotalsOptions(fileContent, chartTarget) {
         element: chartTarget,
         data: chartData,
         // segment colours
-        colors: [
-            'red',
-            'green',
-            'blue',
-            'black',
-            'pink'
-        ]
+        //colors: getRainbow(chartData.length)
+        colors: getRainbow(chartData.length)
     }
 }
