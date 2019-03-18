@@ -11,22 +11,25 @@
 #totals-charts .chart-container {
     padding: 7px;
     display: inline-block;
-    width: calc(33% - 14px);
+    width: calc(32.9% - 14px);
     text-align: center;
 }
 .mdl-card {
-    padding: 10px;
     display: block;
+}
+.mdl-card__content {
+    padding: 10px;
 }
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 .chart-group-heading {
     display: block;
+    margin: 0 0 -10px 0;
 }
 .chart-title {
-    color: #37474f;
-    margin: 10px auto -10px auto;
+    color: #dbdbdb;
+    margin: 20px auto -10px auto;
 }
 #totals-charts .chart, #totals-charts .chart svg {
     width: 100%;
@@ -62,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #eeeeee;
 }
 html {
-    color: #1a1a1a;
+    color: #eeeeee;
 }
 .drawer-header {
     box-sizing: border-box;
@@ -87,4 +90,49 @@ html {
 .drawer-header .drawer-header-company-icon {
     width: 110px;
     height: 110px;
+}
+
+main {
+    background: #1a1a1a;
+}
+.mdl-card {
+    background: #333;
+}
+main > div {
+  max-width: 1080px;
+}
+.tips {
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+}
+.morris-hover.morris-default-style {
+    background: #1a1a1aee;
+    color: #eeeeee;
+}
+.mdl-card__title {
+    color: inherit;
+}
+.mdl-card.water-tips .mdl-card__title {
+    height: 200px;
+}
+.mdl-card.water-tips {
+    background-color: #006dcc;
+    background-image: url("/images/water-tips.png");
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.mdl-card__actions.mdl-card--border {
+    border-top: 1px solid #eeeeee44;
+}
+.mdl-button {
+    color: #eeeeee;
+}
+
+#totals-charts .chart svg text:nth-of-type(2)::after {
+    content: "L";
 }

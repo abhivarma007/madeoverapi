@@ -68,8 +68,9 @@ function getTotalsOptions(fileContent, chartTarget) {
         // ID of target element
         element: chartTarget,
         data: chartData,
+        resize: false,
         // segment colours
-        //colors: getRainbow(chartData.length)
-        colors: getRainbow(chartData.length)
+        colors: getRainbow(chartData.length),
+        labelColor: '#d9d9d9'
     }
 }

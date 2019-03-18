@@ -55,11 +55,12 @@ function getRatesOptions(fileContent, chartTarget) {
         fillOpacity: 0.6,
         hideHover: 'auto',
         behaveLikeLine: true,
-        resize: true,
+        resize: false,
         pointSize: 2,
-        pointFillColors:['#ffffff'],
-        pointStrokeColors: ['black'],
-        lineColors:['gray','red'],
-        smooth: true
+        pointFillColors:['#eeeeee'],
+        pointStrokeColors: ['#1a1a1a'],
+        lineColors:['#006dcc'],
+        smooth: true,
+        gridTextColor: '#eee'
   }
 }
