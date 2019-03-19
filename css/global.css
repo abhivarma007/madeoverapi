@@ -1,13 +1,14 @@
 :root {
     /* create variables for theme */
-    --text-color: #eeeeee;
-    --background-color: #1a1a1a;
-    --theme-color: #006dcc;
+    /* RGB, so alpha channel can be added later (only when required) */
+    --text-color: 238, 238, 238;
+    --background-color: 26, 26, 26;
+    --theme-color: 0, 109, 204;
 }
 
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
-    color: var(--text-color);
+    color: rgb(var(--text-color));
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -15,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 main {
-    background: var(--background-color);
+    background: rgb(var(--background-color));
 }
 
 main > div {
@@ -33,12 +34,12 @@ main > div {
 }
 
 .mdl-drawer, .mdl-layout__header {
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: rgb(var(--background-color));
+    color: rgb(var(--text-color));
 }
 
 .mdl-layout .mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-    color: var(--text-color);
+    color: rgb(var(--text-color));
 }
 
 .drawer-header {
@@ -95,7 +96,7 @@ main > div {
 }
 
 .mdl-layout .mdl-navigation .mdl-navigation__link:hover, .mdl-layout .mdl-navigation .mdl-navigation__link--activated {
-    background-color: var(--theme-color);
+    background-color: rgb(var(--theme-color));
 }
 
 .mdl-navigation {
@@ -117,7 +118,7 @@ main > div {
 
 /* seach box helper text START */
 .mdl-textfield__label {
-    color: var(--text-color);
+    color: rgb(var(--text-color));
 }
 /* seach box helper text END */
 /* Safari (iOS) workaround START */
@@ -141,7 +142,7 @@ main > div {
 }
 
 .mdl-card__actions.mdl-card--border {
-    border-top: 1px solid var(--text-color)44;
+    border-top: 1px solid rgba(var(--text-color), 0.3);
 }
 
 .mdl-card__content {
@@ -154,9 +155,9 @@ main > div {
 /* MDL Cards END */
 
 .mdl-button {
-    color: var(--text-color);
+    color: rgb(var(--text-color));
 }
 
 .mdl-ripple {
-    background: var(--background-color);
+    background: rgb(var(--background-color));
 }

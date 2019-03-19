@@ -19,7 +19,7 @@
 
 /* water-saving tips START */
 .mdl-card.water-tips {
-    background-color: var(--theme-color);
+    background-color: rgb(var(--theme-color));
     background-image: url("/images/water-tips.png");
     background-size: cover;
     background-position: center;
