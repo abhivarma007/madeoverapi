@@ -1,7 +1,7 @@
 window.onload = function() {
     // only first doughnut chart initiation code is commented, as the code is the same for each one (apart from chart variable names)
     // retrieve data
-    $.get("/totals/daily/global.csv", function(fileContent) {
+    $.get("/totals/daily.csv", function(fileContent) {
         // define chart
         window.global_daily_total = Morris.Donut(getTotalsOptions(fileContent, 'global_daily_total'));
         // define variable for currently selected segment (a number)
@@ -10,12 +10,12 @@ window.onload = function() {
         // hovered over yet, to avoid unexpected segment selection alteration when chart refreshes for first time
         window.global_daily_total.select(0);
     });
-    $.get("/totals/weekly/global.csv", function(fileContent) {
+    $.get("/totals/weekly.csv", function(fileContent) {
         window.global_weekly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_weekly_total'));
         window.global_weekly_total_currentSegment = { value: 0 };
         window.global_weekly_total.select(0);
     });
-    $.get("/totals/monthly/global.csv", function(fileContent) {
+    $.get("/totals/monthly.csv", function(fileContent) {
         window.global_monthly_total = Morris.Donut(getTotalsOptions(fileContent, 'global_monthly_total'));
         window.global_monthly_total_currentSegment = { value: 0 };
         window.global_monthly_total.select(0);
@@ -36,9 +36,9 @@ window.onload = function() {
 
     // auto-update charts
     setInterval(function(){
-        updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily/global.csv");
-        updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly/global.csv");
-        updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly/global.csv");
+        updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily.csv");
+        updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly.csv");
+        updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly.csv");
         updateRates(window.global_daily_rate, "/rates/daily/global.csv");
         updateRates(window.global_weekly_rate, "/rates/weekly/global.csv");
         updateRates(window.global_monthly_rate, "/rates/monthly/global.csv");
