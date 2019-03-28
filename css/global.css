@@ -9,6 +9,7 @@
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
     color: rgb(var(--text-color));
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -161,3 +162,48 @@ main > div {
 .mdl-ripple {
     background: rgb(var(--background-color));
 }
+
+/* tips dialog START */
+.mdl-card.water-tips {
+    background-color: rgb(var(--theme-color));
+    background-image: url("/images/water-tips.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.mdl-card.water-tips .mdl-card__title {
+    height: 200px;
+}
+
+.tips-dialog {
+    display: none;
+    background-color: rgb(var(--theme-color));
+    border-radius: 10px;
+    min-height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    padding: 10px;
+    max-width: calc(100% - 32px);
+    overflow: auto;
+    text-align: center;
+    min-width: 50%;
+}
+
+.tips-dialog .mdl-card__title h2 {
+    margin: auto;
+}
+
+.tips-dialog-shadow {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--background-color),0.75);
+    position: absolute;
+    z-index: 1;
+    margin: 8px;
+}
+/* tips dialog END */
