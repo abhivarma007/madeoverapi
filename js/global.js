@@ -6,7 +6,7 @@ $(document).ready(function() {
     window.text_color = getCSSColorVariable("--text-color");
     window.background_color = getCSSColorVariable('--background-color');
     window.theme_color = getCSSColorVariable('--theme-color');
-    $(".mdl-navigation").load("/_includes/navbar.html", function() {
+    $(".mdl-navigation").load("/includes/navbar.html", function() {
         // get current URL with no forward slash at the end and no domain
         var drawer_item_link_query_selector = ".mdl-navigation__link[href='" + window.location.pathname;
         if (drawer_item_link_query_selector.substring(drawer_item_link_query_selector.length - 1) == "/") {
