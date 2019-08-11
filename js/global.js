@@ -20,6 +20,7 @@ $(document).ready(function() {
     });
 });
 
+
 function openTips() {
     $(".mdl-layout__content").scrollTop(0);
     $(".tips-dialog .mdl-card__content .global-tips").load("/global-improvement.txt", function() {
@@ -47,4 +48,17 @@ function closeTips() {
         queue: false
     });
     $(".mdl-layout__content").css("overflow-y", "auto");
+}
+
+function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+    for (var i = arr1.length; i--;) {
+        if (JSON.stringify(arr1[i]) !== JSON.stringify(arr2[i])) {
+            return false;
+        }
+    }
+
+    return true;
 }

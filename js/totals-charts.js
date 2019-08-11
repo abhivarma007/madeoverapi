@@ -41,19 +41,26 @@ function sortTotalsData(data) {
 }
 
 // function for auto-updating doughnut charts
-function updateTotals(chart, currentSegment, csvFileLocation) {
+function updateTotals(chart, currentSegment, csvFileLocation, forceUpdate) {
     // retrieve new data
-    $.get(csvFileLocation, function(fileContent) {
-        // change data on chart to correctly-formatted new data
-        chart.setData(sortTotalsData(fileContent));
-        // select the previously selected segment
-        chart.select(currentSegment.value);
+    $.get(csvFileLocation, function (fileContent) {
+        // format new data
+        newData = sortTotalsData(fileContent);
+        // retrieve current data
+        oldData = chart.data;
+        // change the data only if it is different
+        if (!(arraysEqual(newData, oldData)) || forceUpdate) {
+            // change data on chart to correctly-formatted new data
+            chart.setData(newData);
+            // select the previously selected segment
+            chart.select(currentSegment.value);
 
-        // ensure variable storing currently selected segment is updated
-        for ( i = 0; i < chart.segments.length; i++ ) {
-            chart.segments[i].handlers["hover"].push( function(i) {
-                currentSegment.value = i;
-            });
+            // ensure variable storing currently selected segment is updated
+            for (i = 0; i < chart.segments.length; i++) {
+                chart.segments[i].handlers["hover"].push(function (i) {
+                    currentSegment.value = i;
+                });
+            }
         }
     });
 }

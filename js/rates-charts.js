@@ -29,11 +29,22 @@ function sortRatesData(data) {
 }
 
 // function for auto-updating doughnut charts
-function updateRates(chart, csvFileLocation) {
+function updateRates(chart, csvFileLocation, forceUpdate) {
     // retrieve new data
     $.get(csvFileLocation, function(fileContent) {
-        // change data on chart to correctly-formatted new data
-        chart.setData(sortRatesData(fileContent));
+        // format new data
+        newData = sortRatesData(fileContent);
+        // retrieve current data
+        completeOldData = chart.data;
+        oldData = []
+        completeOldData.forEach(function(item) {
+            oldData.push(item.src);
+        })
+        // change the data only if it is different
+        if (!arraysEqual(newData, oldData) || forceUpdate) {
+            // change data on chart to correctly-formatted new data
+            chart.setData(newData);
+        }
     });
 }
 

@@ -34,14 +34,50 @@ window.onload = function() {
         window.global_monthly_rate = Morris.Line(getRatesOptions(fileContent, 'global_monthly_rate'));
     });
 
-    // auto-update charts
-    setInterval(function(){
-        updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily.csv");
-        updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly.csv");
-        updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly.csv");
-        updateRates(window.global_daily_rate, "/rates/daily/global.csv");
-        updateRates(window.global_weekly_rate, "/rates/weekly/global.csv");
-        updateRates(window.global_monthly_rate, "/rates/monthly/global.csv");
+    function forceTotalsUpdates() {
+        updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily.csv", true);
+        updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly.csv", true);
+        updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly.csv", true);
+    }
+
+    // add the data to the charts, and update them to make sure they're the correct size
+    run = true
+    while (run) {
+        try {
+            forceTotalsUpdates();
+            run = false;
+        } finally {
+            setTimeout(function () {
+                $(".chart svg").height($(".chart svg").width());
+                forceTotalsUpdates();
+            }, 500);
+        }
+    }
+
+    // auto-update charts when data changes
+    setInterval(function() {
+        updateTotals(window.global_daily_total, window.global_daily_total_currentSegment, "/totals/daily.csv", false);
+        updateTotals(window.global_weekly_total, window.global_weekly_total_currentSegment, "/totals/weekly.csv", false);
+        updateTotals(window.global_monthly_total, window.global_monthly_total_currentSegment, "/totals/monthly.csv", false);
+        updateRates(window.global_daily_rate, "/rates/daily/global.csv", false);
+        updateRates(window.global_weekly_rate, "/rates/weekly/global.csv", false);
+        updateRates(window.global_monthly_rate, "/rates/monthly/global.csv", false);
         $(".chart svg").height($(".chart svg").width());
-    },1000);
+    }, 1000);
+
+    // auto-update charts when screen resolution changes
+    window.addEventListener("resize", function () {
+        forceTotalsUpdates();
+        updateRates(window.global_daily_rate, "/rates/daily/global.csv", true);
+        updateRates(window.global_weekly_rate, "/rates/weekly/global.csv", true);
+        updateRates(window.global_monthly_rate, "/rates/monthly/global.csv", true);
+        $(".chart svg").height($(".chart svg").width());
+    });
+    window.addEventListener("orientationchange", function () {
+        forceTotalsUpdates();
+        updateRates(window.global_daily_rate, "/rates/daily/global.csv", true);
+        updateRates(window.global_weekly_rate, "/rates/weekly/global.csv", true);
+        updateRates(window.global_monthly_rate, "/rates/monthly/global.csv", true);
+        $(".chart svg").height($(".chart svg").width());
+    });
 }
